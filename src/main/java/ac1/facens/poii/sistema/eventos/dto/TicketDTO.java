@@ -3,18 +3,19 @@ package ac1.facens.poii.sistema.eventos.dto;
 import java.time.Instant;
 
 import ac1.facens.poii.sistema.eventos.entities.Ticket;
+import ac1.facens.poii.sistema.eventos.entities.TicketType;
 
 public class TicketDTO {
 
     private long id;
-    private Enum type;
+    private TicketType type;
     private Instant date;
     private double price;
     
     public TicketDTO() {
 
     }
-    public TicketDTO(long id, Enum type, Instant date, double price) {
+    public TicketDTO(long id, TicketType type, Instant date, double price) {
         this.id = id;
         this.type = type;
         this.date = date;
@@ -32,12 +33,6 @@ public class TicketDTO {
     public void setId(long id) {
         this.id = id;
     }
-    public Enum getType() {
-        return type;
-    }
-    public void setType(Enum type) {
-        this.type = type;
-    }
     public Instant getDate() {
         return date;
     }
@@ -49,6 +44,12 @@ public class TicketDTO {
     }
     public void setPrice(double price) {
         this.price = price;
+    }
+    public TicketType getType() {
+        return type;
+    }
+    public void setType(TicketType type) {
+        this.type = type;
     }
     
     

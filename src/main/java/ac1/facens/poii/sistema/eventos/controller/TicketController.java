@@ -36,7 +36,6 @@ public class TicketController {
         @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
         @RequestParam(value = "direction",    defaultValue = "ASC") String direction,
         @RequestParam(value = "orderBy",      defaultValue = "id") String orderBy,
-        @RequestParam(value = "type",         defaultValue = "") Enum type,
         @RequestParam(value = "date",        defaultValue = "") Instant date,
         @RequestParam(value = "price",        defaultValue = "") double price
     ){
@@ -44,7 +43,7 @@ public class TicketController {
         
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
         
-        Page <TicketDTO> list = serviceticket.getTicket(pageRequest, type, date, price);
+        Page <TicketDTO> list = serviceticket.getTicket(pageRequest, date, price);
         
         return ResponseEntity.ok().body(list);
     }

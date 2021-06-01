@@ -19,11 +19,11 @@ public class Ticket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Enum type; // depende do evento
+    private TicketType type; // depende do evento
     private Instant date;
     private double price;
     
-    public Ticket(long id, Enum type, Instant date, double price) {
+    public Ticket(long id, TicketType type, Instant date, double price) {
         this.id = id;
         this.type = type;
         this.date = date;
@@ -34,17 +34,12 @@ public class Ticket implements Serializable {
         this.date = dto.getDate();
         this.price = dto.getPrice();
     }
+
     public long getId() {
         return id;
     }
     public void setId(long id) {
         this.id = id;
-    }
-    public Enum getType() {
-        return type;
-    }
-    public void setType(Enum type) {
-        this.type = type;
     }
     public Instant getDate() {
         return date;
@@ -58,16 +53,20 @@ public class Ticket implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+    public TicketType getType() {
+        return type;
+    }
+    public void setType(TicketType type) {
+        this.type = type;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
-        long temp;
-        temp = Double.doubleToLongBits(price);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
     @Override
@@ -79,20 +78,9 @@ public class Ticket implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Ticket other = (Ticket) obj;
-        if (date == null) {
-            if (other.date != null)
-                return false;
-        } else if (!date.equals(other.date))
-            return false;
         if (id != other.id)
-            return false;
-        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-            return false;
-        if (type == null) {
-            if (other.type != null)
-                return false;
-        } else if (!type.equals(other.type))
             return false;
         return true;
     }
+    
 }

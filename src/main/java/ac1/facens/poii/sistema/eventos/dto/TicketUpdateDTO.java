@@ -2,18 +2,15 @@ package ac1.facens.poii.sistema.eventos.dto;
 
 import java.time.Instant;
 
+import ac1.facens.poii.sistema.eventos.entities.TicketType;
+
 public class TicketUpdateDTO {
 
-    private Enum type;
+    private TicketType type;
     private Instant date;
     private double price;
     
-    public Enum getType() {
-        return type;
-    }
-    public void setType(Enum type) {
-        this.type = type;
-    }
+
     public Instant getDate() {
         return date;
     }

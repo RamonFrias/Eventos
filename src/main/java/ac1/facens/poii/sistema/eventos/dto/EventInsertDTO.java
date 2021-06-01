@@ -3,9 +3,11 @@ package ac1.facens.poii.sistema.eventos.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import ac1.facens.poii.sistema.eventos.entities.Admin;
+
 public class EventInsertDTO {
     
-    private Long AdminID; 
+    private Admin admin; 
     private String name;
     private String description;
     private String place;
@@ -27,13 +29,19 @@ public class EventInsertDTO {
         return amountFreeTickets;
     }
 
-    public Long getAdminID() {
-        return AdminID;
+ 
+
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setAdminID(Long adminID) {
-        this.AdminID = adminID;
+
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
+
+
 
     public void setAmountFreeTickets(Long amountFreeTickets) {
         this.amountFreeTickets = amountFreeTickets;

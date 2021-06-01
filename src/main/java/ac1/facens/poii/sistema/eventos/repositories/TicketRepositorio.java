@@ -16,9 +16,8 @@ public interface TicketRepositorio extends JpaRepository<Ticket,Long>{
     
     @Query("SELECT tk FROM Ticket tk " + 
            "WHERE " +
-           "LOWER(tk.type)           LIKE   LOWER(CONCAT('%', :type, '%'))          AND " +
-           "LOWER(tk.date)          LIKE   LOWER(CONCAT('%', :date, '%'))AND " +
+           "LOWER(tk.date)          LIKE   LOWER(CONCAT('%', :date, '%'))           AND " +
            "LOWER(tk.price)          LIKE   LOWER(CONCAT('%', :price, '%'))")
 
-    public Page<Ticket>find(Pageable pageResquest, Enum type, Instant date, double price);
+    public Page<Ticket>find(Pageable pageResquest, Instant date, double price);
 }

@@ -26,9 +26,9 @@ public class TicketService {
     private TicketRepositorio repositoryticket;
     
     
-    public Page<TicketDTO> getTicket(PageRequest pageRequest, Enum type, Instant date, double price) {
+    public Page<TicketDTO> getTicket(PageRequest pageRequest, Instant date, double price) {
         
-        Page<Ticket> list = repositoryticket.find(pageRequest, type, date, price);
+        Page<Ticket> list = repositoryticket.find(pageRequest, date, price);
 
         return list.map( tk -> new TicketDTO(tk));
     }
@@ -53,7 +53,6 @@ public class TicketService {
             Ticket entity = repositoryticket.getOne(id);
             entity.setDate(dto.getDate());
             entity.setPrice(dto.getPrice());
-            entity.setType(dto.getType());
             entity = repositoryticket.save(entity);
     
             return new TicketDTO(entity);
