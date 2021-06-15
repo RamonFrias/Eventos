@@ -30,7 +30,7 @@ public class PlaceService {
 
         return list.map( pl -> new PlaceDTO(pl));
     }
-    
+
     public PlaceDTO getPlaceById(Long id){
 
         Optional<Place> op = repositoryplace.findById(id);
@@ -38,6 +38,15 @@ public class PlaceService {
         Place pl = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found"));
 
         return new PlaceDTO(pl);
+    }
+    
+    public Place getPlaceeById(Long id){
+
+        Optional<Place> op = repositoryplace.findById(id);
+
+        Place pl = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found"));
+
+        return new Place(pl);
     }
 
     public PlaceDTO insert(PLaceInsertDTO dto) {

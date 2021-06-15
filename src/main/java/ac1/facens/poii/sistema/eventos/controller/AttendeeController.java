@@ -2,6 +2,8 @@ package ac1.facens.poii.sistema.eventos.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +60,7 @@ public class AttendeeController {
     }
 
     @PostMapping
-    public ResponseEntity<AttendeeDTO> insert(@RequestBody AttendeeInsertDTO insertDTO){
+    public ResponseEntity<AttendeeDTO> insert(@Valid @RequestBody AttendeeInsertDTO insertDTO){
         AttendeeDTO dto = serviceAttendee.insert(insertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);

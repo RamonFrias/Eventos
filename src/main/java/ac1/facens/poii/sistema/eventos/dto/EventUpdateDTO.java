@@ -10,7 +10,6 @@ public class EventUpdateDTO {
     private Admin admin; 
     private String name;
     private String description;
-    private String place;
 //  DATA E HORA
     private LocalDate start_date;
     private LocalDate end_date;
@@ -86,12 +85,6 @@ public class EventUpdateDTO {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public String getPlace() {
-        return place;
-    }
-    public void setPlace(String place) {
-        this.place = place;
     }
     public LocalDate getStart_date() {
         return start_date;

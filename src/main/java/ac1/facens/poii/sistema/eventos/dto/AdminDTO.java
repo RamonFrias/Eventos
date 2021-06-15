@@ -1,5 +1,6 @@
 package ac1.facens.poii.sistema.eventos.dto;
 
+
 import ac1.facens.poii.sistema.eventos.entities.Admin;
 
 public class AdminDTO {
@@ -7,6 +8,7 @@ public class AdminDTO {
     private String name;
     private String email;
     private String phoneNumber;
+
     
     public AdminDTO() {
 
@@ -48,5 +50,4 @@ public class AdminDTO {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 }

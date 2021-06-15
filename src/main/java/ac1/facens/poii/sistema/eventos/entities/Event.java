@@ -3,17 +3,23 @@ package ac1.facens.poii.sistema.eventos.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ac1.facens.poii.sistema.eventos.dto.EventInsertDTO;
 
@@ -26,10 +32,10 @@ public class Event implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @ManyToOne
-    @JoinColumn(name = "ADMIN_USER_ID")  
-    private Admin admin; 
+    @JoinColumn(name = "admin_ID")
+    private Admin admin;
 
     @NotEmpty(message = "Please enter a user name")
     @NotNull
@@ -47,11 +53,23 @@ public class Event implements Serializable{
     @Email
     private String email_contact;
 // Agrecentando Ac2
-    private Long amountFreeTickets;
-    private Long amountPayedTickets; 
+    private Long amountFreeTickets; //15 /// -- 1 -> variavelja vendidos -> 
+    private Long amountPayedTickets;
     private Double priceTicket;
 
-    
+    @OneToMany
+    @JoinColumn(name="event_id")
+    private List<Ticket> ticket = new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "Tb_event_place",
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "place_id")
+    )
+    private List<Place> places = new ArrayList<>();
+  
     public Event(){
         
     }
@@ -69,7 +87,22 @@ public class Event implements Serializable{
         this.priceTicket = dto.getPriceTicket();
     }
 
- 
+    public Event(Event ev) {
+        this.id = ev.getId();
+        this.admin = ev.getAdmin();
+        this.name = ev.getName();
+        this.description = ev.getDescription();
+        this.start_date = ev.getStart_date();
+        this.end_date = ev.getEnd_date();
+        this.start_time = ev.getStart_time();
+        this.end_time = ev.getEnd_time();
+        this.email_contact = ev.getEmail_contact();
+        this.amountFreeTickets = ev.getAmountFreeTickets();
+        this.amountPayedTickets = ev.getAmountPayedTickets();
+        this.priceTicket = ev.getPriceTicket();
+        this.places = ev.getPlaces();
+    }
+
     public Admin getAdmin() {
         return admin;
     }
@@ -153,7 +186,36 @@ public class Event implements Serializable{
     public void setPriceTicket(Double priceTicket) {
         this.priceTicket = priceTicket;
     }
+    
 
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void addPlaces(Place places) {
+        this.places.add(places);
+    }
+
+    public void deletePlace(Place eventPlace){
+        this.places.remove(eventPlace);
+    }
+
+    public void removePlace(Place eventPlace){
+        places.remove(eventPlace);
+    }
+//TICKET
+     public List<Ticket> getTicket() {
+        return ticket;
+    }
+
+    public void addTicket(Ticket ticket) {
+        this.ticket.add(ticket);
+    }
+
+    public void removeTickets() {
+       this.ticket.removeAll(ticket);
+    } 
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -161,6 +223,8 @@ public class Event implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
+   
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

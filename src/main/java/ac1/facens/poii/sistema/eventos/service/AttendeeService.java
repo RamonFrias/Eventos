@@ -44,9 +44,13 @@ public class AttendeeService {
     public AttendeeDTO insert(AttendeeInsertDTO dto) {
         Attendee entity = new Attendee(dto);
         if(entity.getBalance() < 0) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Balance cannot be negative");
-        entity = repositoryAttendee.save(entity);
+        else{
+            entity = repositoryAttendee.save(entity);
+        }
+        
         return new AttendeeDTO(entity);
     }
+    
     public AttendeeDTO update(Long id, AttendeeUpdateDTO dto){
         try{
             Attendee entity = repositoryAttendee.getOne(id);

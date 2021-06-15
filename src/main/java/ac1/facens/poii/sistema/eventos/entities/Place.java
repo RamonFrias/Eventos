@@ -1,14 +1,21 @@
 package ac1.facens.poii.sistema.eventos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ac1.facens.poii.sistema.eventos.dto.PLaceInsertDTO;
 
@@ -29,6 +36,14 @@ public class Place implements Serializable {
     @NotNull
     private String address;
 
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "Tb_event_place",
+        joinColumns = @JoinColumn(name = "place_id"),
+        inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> events = new ArrayList<>();
 
     public Place() {
 
@@ -38,11 +53,25 @@ public class Place implements Serializable {
         this.name = name;
         this.address = address;
     }
+    public Place(Place pl){
+        this.id = pl.getId();
+        this.name = pl.getName();
+        this.address = pl.getAddress();
+    }
     
     public Place(PLaceInsertDTO dto) {
         this.name = dto.getName();
         this.address = dto.getAddress();
     }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void addEvents(Event events) {
+        this.events.add(events);
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,6 +89,10 @@ public class Place implements Serializable {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void removePlace(Event eventPlace){
+        events.remove(eventPlace);
     }
     @Override
     public int hashCode() {

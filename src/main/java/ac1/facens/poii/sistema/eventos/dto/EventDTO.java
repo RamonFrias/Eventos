@@ -2,9 +2,11 @@ package ac1.facens.poii.sistema.eventos.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.util.List;
 import ac1.facens.poii.sistema.eventos.entities.Admin;
 import ac1.facens.poii.sistema.eventos.entities.Event;
+import ac1.facens.poii.sistema.eventos.entities.Place;
+import ac1.facens.poii.sistema.eventos.entities.Ticket;
 
 public class EventDTO {
 
@@ -14,7 +16,6 @@ public class EventDTO {
 
     private String name;
     private String description;
-    private String place;
 //  DATA E HORA
     private LocalDate start_date;
     private LocalDate end_date;
@@ -27,29 +28,30 @@ public class EventDTO {
     private Long amountPayedTickets;  
     private Double priceTicket;
 
+    private List<Place> places;
 
     public EventDTO(){ //construtor padrao
 
     }
     
-    public EventDTO(Long id, String name, String description, String place, LocalDate start_date, LocalDate end_date, LocalTime  start_time,  LocalTime  end_time, String email_contact, Long amountFreeTickets, Long amountPayedTickets, Double priceTicket){
-        //declaração
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.place = place;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.start_time = start_time;
-        this.end_time = end_time;
-        this.email_contact = email_contact;
-        this.amountFreeTickets = amountFreeTickets;
-        this.amountPayedTickets = amountPayedTickets;
-        this.priceTicket = priceTicket;
-    }
+    // public EventDTO(Long id, String name, String description, LocalDate start_date, LocalDate end_date, LocalTime  start_time,  LocalTime  end_time, String email_contact, Long amountFreeTickets, Long amountPayedTickets, Double priceTicket){
+    //     //declaração
+    //     this.id = id;
+    //     this.name = name;
+    //     this.description = description;
+    //     this.start_date = start_date;
+    //     this.end_date = end_date;
+    //     this.start_time = start_time;
+    //     this.end_time = end_time;
+    //     this.email_contact = email_contact;
+    //     this.amountFreeTickets = amountFreeTickets;
+    //     this.amountPayedTickets = amountPayedTickets;
+    //     this.priceTicket = priceTicket;
+    // }
 
     public EventDTO(Event ev) {
-        this.id = ev.getId(); 
+        this.id = ev.getId();
+        this.admin = ev.getAdmin();
         this.name = ev.getName();
         this.description = ev.getDescription();
         this.start_date = ev.getStart_date();
@@ -60,8 +62,9 @@ public class EventDTO {
         this.amountFreeTickets = ev.getAmountFreeTickets();
         this.amountPayedTickets = ev.getAmountPayedTickets();
         this.priceTicket = ev.getPriceTicket();
+        this.places = ev.getPlaces();
     }
-
+  
    public Admin getAdmin() {
         return admin;
     }
@@ -112,12 +115,6 @@ public class EventDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getPlace() {
-        return place;
-    }
-    public void setPlace(String place) {
-        this.place = place;
-    }
     public LocalDate getStart_date() {
         return start_date;
     }
@@ -149,4 +146,11 @@ public class EventDTO {
         this.email_contact = email_contact;
     }
 
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void addPlaces(Place places) {
+        this.places.add(places);
+    }
 }

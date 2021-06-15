@@ -1,5 +1,6 @@
 package ac1.facens.poii.sistema.eventos.dto;
 
+
 import ac1.facens.poii.sistema.eventos.entities.Place;
 
 public class PlaceDTO {
@@ -8,7 +9,8 @@ public class PlaceDTO {
     
     private String name;
     private String address;
-   
+
+    
     public PlaceDTO() {
 
     }

@@ -26,6 +26,7 @@ public class Admin extends BaseUser{
     @OneToMany(mappedBy = "admin")
     private List<Event> events = new ArrayList<>();
 
+
     public Admin() {
 
     }
@@ -43,13 +44,6 @@ public class Admin extends BaseUser{
         this.phoneNumber = dto.getPhoneNumber();
     }
 
-
-    public List<Event> getEvents() {
-        return events;
-    }
-    public void addEvents(Event event) {
-        this.events.add(event);
-    }
     public String getPhoneNumber() {
         return phoneNumber;
     }
