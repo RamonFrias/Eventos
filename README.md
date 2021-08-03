@@ -1,9 +1,3 @@
-# Projeto Cadastro Eventos #
-
-NOME: Carlos Kainã de OLiveira Quirino Ramalho.
-
-NOME: Ramon Frias.
-
 # para cadastrar no Postman JSON #
 //admins
 {
@@ -15,7 +9,6 @@ NOME: Ramon Frias.
 {
     "name": "",
     "description": "",
-    "place": "",
     "start_date": "",
     "end_date": "",
     "start_time": "",
@@ -38,12 +31,10 @@ NOME: Ramon Frias.
     "name": "",
     "address": ""
 }
-
-# Erro de aplicações e bugs #
-
-O codigo não esta conseguindo buildar no HEROKU.
-Estava dando erro na hora de fazer o deploy no heroku. Então foi criando outro repository para fazer o deploy. Agora esta funcionando corretamente.
-Segue o link do repositorio: https://github.com/RamonFrias/teste-heroku
-Link: https://eventos-poo2.herokuapp.com/
-
-O id do admin so vai aparecer no banco H2-console
+//Tickets
+{
+"type": "",
+    "atendee": {
+        "id": ""
+    }
+}
